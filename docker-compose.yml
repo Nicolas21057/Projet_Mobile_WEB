@@ -34,13 +34,16 @@ services:
       - "3001:3001"
     environment:
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/my-app
+      - BETTER_AUTH_SECRET=une_cle_secrete_longue_et_aleatoire_123456
+      - BETTER_AUTH_URL=http://localhost:3001
+      - CORS_ORIGIN=http://localhost:3001
     depends_on:
       postgres:
         condition: service_healthy
     restart: unless-stopped
 
   postgres:
-    image: postgres
+    image: postgres:16
     container_name: my-app-postgres
     environment:
       POSTGRES_DB: my-app
